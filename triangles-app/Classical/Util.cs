@@ -21,9 +21,9 @@ namespace TrianglesApp.Classical
 
         public static double[] ParseRow(string row, long idx)
         {
-            string[] splat = row.Split(';');
+            string[] partitioned = row.Split(';');
 
-            if (splat.Length < DATA_SIZE)
+            if (partitioned.Length < DATA_SIZE)
             {
                 throw new ArgumentException(String.Format("Not enough arguments at row {0}", idx));
             }
@@ -32,7 +32,7 @@ namespace TrianglesApp.Classical
             for (int i = 0; i < DATA_SIZE; i++)
             {
                 double buf;
-                if (Double.TryParse(splat[i], out buf))
+                if (Double.TryParse(partitioned[i], out buf))
                 {
                     result[i] = buf;
                 }
