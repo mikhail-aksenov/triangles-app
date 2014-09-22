@@ -52,14 +52,21 @@ namespace TrianglesApp.Classical
         public double Beta  { get { return Triangle.computeAngle(b, c, a); } }
         public double Gamma { get { return Triangle.computeAngle(a, c, b); } }
 
-        private void validateSide(double side)
+        private static void validateSide(double side)
         {
             if (side <= 0)
-                throw new ArgumentException("Side of triangle cannot be less than 0.");
+                throw new ArgumentOutOfRangeException("Side must be greater than 0.");
+        }
+
+        private static void validateAngle(double angle)
+        {
+            if (angle <= 0 && angle >= 180)
+                throw new ArgumentOutOfRangeException("Angle must be in range (0; 180)");
         }
 
         public static double computeSide(double a, double b, double angle)
         {
+            validateAngle(angle);
             double angleRad = Util.DegToRad(angle);
             return Math.Sqrt(a * a + b * b - 2 * a * b * Math.Cos(angleRad));
         }
