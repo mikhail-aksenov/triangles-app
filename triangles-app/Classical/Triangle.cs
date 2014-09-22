@@ -19,7 +19,7 @@ namespace TrianglesApp.Classical
             } 
             set 
             { 
-                validateSide(value); 
+                ValidateSide("A", value); 
                 a = value ;
             }
         }
@@ -31,7 +31,7 @@ namespace TrianglesApp.Classical
             }
             set 
             {
-                validateSide(value);
+                ValidateSide("B", value);
                 b = value;
             }
         }
@@ -43,35 +43,35 @@ namespace TrianglesApp.Classical
             }
             set
             {
-                validateSide(value);
+                ValidateSide("C", value);
                 c = value;
             }
         }
 
-        public double Alpha { get { return Triangle.computeAngle(a, b, c); } }
-        public double Beta  { get { return Triangle.computeAngle(b, c, a); } }
-        public double Gamma { get { return Triangle.computeAngle(a, c, b); } }
+        public double Alpha { get { return Triangle.ComputeAngle(a, b, c); } }
+        public double Beta  { get { return Triangle.ComputeAngle(b, c, a); } }
+        public double Gamma { get { return Triangle.ComputeAngle(a, c, b); } }
 
-        private static void validateSide(double side)
+        private static void ValidateSide(string name,double side)
         {
             if (side <= 0)
-                throw new ArgumentOutOfRangeException("Side must be greater than 0.");
+                throw new ArgumentOutOfRangeException(name, "Side must be greater than 0.");
         }
 
-        private static void validateAngle(double angle)
+        private static void ValidateAngle(double angle)
         {
             if (angle <= 0 && angle >= 180)
-                throw new ArgumentOutOfRangeException("Angle must be in range (0; 180)");
+                throw new ArgumentOutOfRangeException("Alpha", "Angle must be in range (0; 180)");
         }
 
-        public static double computeSide(double a, double b, double angle)
+        public static double ComputeSide(double a, double b, double angle)
         {
-            validateAngle(angle);
+            ValidateAngle(angle);
             double angleRad = Util.DegToRad(angle);
             return Math.Sqrt(a * a + b * b - 2 * a * b * Math.Cos(angleRad));
         }
 
-        public static double computeAngle(double a, double b, double c)
+        public static double ComputeAngle(double a, double b, double c)
         {
             double angleRad = Math.Acos((a * a + b * b - c * c) / (2 * a * b));
             return Util.RadToDeg(angleRad);
@@ -83,7 +83,7 @@ namespace TrianglesApp.Classical
         {
             this.A = a;
             this.B = b;
-            this.C = Triangle.computeSide(a, b, alpha);
+            this.C = Triangle.ComputeSide(a, b, alpha);
         }
     }
 }

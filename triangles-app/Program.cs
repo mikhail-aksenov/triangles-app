@@ -44,7 +44,7 @@ namespace TrianglesApp
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.Message)
+                Console.WriteLine(e.Message);
             }
             finally
             {
