@@ -21,10 +21,8 @@ namespace TrianglesApp
                     Console.WriteLine("Angles: alpha {0}; beta {1}; gamma {2}.", t.Alpha, t.Beta, t.Gamma);
                     sou.WriteLine(String.Format("{0};{1};{2}", t.A, t.B, t.C));
                 }
-                catch (Exception e)
-                { 
-                    Console.WriteLine(e.Message);
-                }
+                catch (ArgumentException e) { Console.WriteLine(e.Message); }
+                catch (FormatException e) { Console.WriteLine(e.Message); }
             }
         }
 
@@ -43,6 +41,10 @@ namespace TrianglesApp
                 sin = new StreamReader(args[0]);
                 sou = new StreamWriter(args[1]);
                 InvokeClassical(sin, sou);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message)
             }
             finally
             {
